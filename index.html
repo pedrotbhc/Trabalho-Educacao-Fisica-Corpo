@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="tema-c">
+<head>
+  <meta charset="UTF-8">
+  <title>Corpo — Educação Física</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+
+    /* ═══════════════════════════════════════════════════════════
+       TEMAS 
+         tema-a  →  Creme & Terracota   (padrão editorial)
+         tema-b  →  Noite & Ouro        (dramático)
+         tema-c  →  Branco & Folha      (fresco / contemporâneo)
+    ═══════════════════════════════════════════════════════════ */
+
+    html.tema-a {
+      --bg:          #F6F0E4;
+      --bg2:         #EDE6D3;
+      --bg3:         #E3DAC5;
+      --texto:       #1C1710;
+      --texto-leve:  #5C4F3A;
+      --acento:      #A83E1C;
+      --acento2:     #8B6E4E;
+      --slot-bg:     #EBE4D4;
+      --slot-borda:  #C4AD8C;
+      --slot-shadow: rgba(90,60,20,.18);
+      --ornamento:   #C4AD8C;
+      --linha:       rgba(28,23,16,.13);
+    }
+
+    html.tema-b {
+      --bg:          #0E0C09;
+      --bg2:         #161310;
+      --bg3:         #1D1912;
+      --texto:       #EDE6D3;
+      --texto-leve:  #9C8E78;
+      --acento:      #C9973A;
+      --acento2:     #8B7355;
+      --slot-bg:     #1A1712;
+      --slot-borda:  #3D3220;
+      --slot-shadow: rgba(200,150,50,.1);
+      --ornamento:   #3D3220;
+      --linha:       rgba(237,230,211,.1);
+    }
+
+    html.tema-c {
+      --bg:          #F9F9F7;
+      --bg2:         #F1F3EF;
+      --bg3:         #E8EDE5;
+      --texto:       #181A17;
+      --texto-leve:  #556055;
+      --acento:      #3A6B4A;
+      --acento2:     #5C8A6A;
+      --slot-bg:     #EEF1EB;
+      --slot-borda:  #AABFAE;
+      --slot-shadow: rgba(40,80,50,.12);
+      --ornamento:   #AABFAE;
+      --linha:       rgba(24,26,23,.1);
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--texto);
+      font-family: 'EB Garamond', Georgia, serif;
+      min-width: 1100px;
+      overflow-x: hidden;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    /* grão de papel (mds isso foi um LICO FAAAAAAZZZZZZEEEERRRRR) */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='512' height='512' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* seletor do tema */
+    #temas {
+      position: fixed;
+      top: 1.6rem;
+      right: 2rem;
+      z-index: 1000;
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+
+    #temas button {
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      opacity: .55;
+    }
+
+    #temas button:hover  { opacity: 1; transform: scale(1.3); }
+    #temas button.ativo  { opacity: 1; transform: scale(1.2); box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px currentColor; }
+    #temas .ta { background: #A83E1C; color: #A83E1C; }
+    #temas .tb { background: #C9973A; color: #C9973A; }
+    #temas .tc { background: #3A6B4A; color: #3A6B4A; }
+
+    /* ═══════════════════════════════════════════════════════════
+       SLOTS
+    ═══════════════════════════════════════════════════════════ */
+    .slot {
+      background: var(--slot-bg);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: .5rem;
+      box-shadow: 0 3px 10px var(--slot-shadow), 0 12px 40px var(--slot-shadow);
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .slot:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px var(--slot-shadow), 0 24px 60px var(--slot-shadow);
+    }
+
+    /* ornamentos de canto  dois via pseud dois via .slot-wrap */
+    .slot::before { content:''; position:absolute; top:14px;    left:14px;    width:20px; height:20px; border:1.5px solid var(--slot-borda); border-right:none; border-bottom:none; opacity:.65; transition:opacity .3s; pointer-events:none; }
+    .slot::after  { content:''; position:absolute; bottom:14px; right:14px;   width:20px; height:20px; border:1.5px solid var(--slot-borda); border-left:none;  border-top:none;    opacity:.65; transition:opacity .3s; pointer-events:none; }
+    .slot:hover::before, .slot:hover::after { opacity:1; }
+
+    .slot-wrap { position: relative; }
+    .slot-wrap::before { content:''; position:absolute; top:14px;    right:14px;  width:20px; height:20px; border:1.5px solid var(--slot-borda); border-left:none;  border-bottom:none; opacity:.5; z-index:2; pointer-events:none; }
+    .slot-wrap::after  { content:''; position:absolute; bottom:14px; left:14px;   width:20px; height:20px; border:1.5px solid var(--slot-borda); border-right:none; border-top:none;    opacity:.5; z-index:2; pointer-events:none; }
+
+    /* padrão pontilhado interno */
+    .sp {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, var(--slot-borda) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: .18;
+      pointer-events: none;
+    }
+
+    /* cruzes de composição */
+    .sc {
+      position: absolute; inset: 0;
+      pointer-events: none;
+    }
+    .sc::before { content:''; position:absolute; top:50%; left:0; right:0; height:1px; background:var(--slot-borda); opacity:.15; }
+    .sc::after  { content:''; position:absolute; left:50%; top:0; bottom:0; width:1px;  background:var(--slot-borda); opacity:.15; }
+
+    /* ícone de placeholder */
+    .si {
+      pointer-events: none;
+      opacity: .16;
+    }
+
+    /* label */
+    .sl {
+      position: absolute;
+      bottom: 1.1rem; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--slot-borda);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: .85;
+    }
+
+    /* variantes de forma */
+    .slot.circular { border-radius: 50%; }
+    .slot.pill     { border-radius: 999px; }
+
+    /* ═══════════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════════ */
+    #hero {
+      width: 100%; min-height: 100vh;
+      position: relative;
+      display: grid;
+      grid-template-columns: 70px 1.1fr 2fr 1.1fr 70px;
+      grid-template-rows:    60px 1fr auto 1fr 85px;
+      overflow: hidden;
+      background: var(--bg);
+      transition: background .5s;
+    }
+
+    /* deco de fundo */
+    #hdeco {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 0;
+    }
+
+    /* anel ornamental */
+    #hring {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none; z-index: 1;
+      transition: opacity .5s;
+    }
+
+    /* marcas de canto */
+    .hanno {
+      position: absolute;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--acento2);
+      opacity: .45;
+      pointer-events: none;
+      z-index: 20;
+    }
+    .hanno.tl { top:1.4rem;    left:1.6rem;  }
+    .hanno.tr { top:1.4rem;    right:1.6rem; }
+    .hanno.bl { bottom:1.4rem; left:1.6rem;  }
+    .hanno.br { bottom:1.4rem; right:1.6rem; }
+
+    /* TÍTULO PRINCIPAL */
+    #titulo-principal {
+      grid-column: 3/4; grid-row: 3/4;
+      z-index: 10;
+      align-self: center; justify-self: center;
+      text-align: center;
+      padding: 2.5rem 3rem;
+
+      /* NAO POSSO ESQUECER DISSO*/
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5.5vw, 6.5rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.05;
+      letter-spacing: -.01em;
+      color: var(--texto);
+      
+      white-space: nowrap;
+      position: absolute;
+    }
+
+    #subtitulo {
+      grid-column: 3/4; grid-row: 4/5;
+      z-index: 10;
+      align-self: start; justify-self: center;
+      margin-top: .4rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--acento2);
+      text-align: center;
+    }
+
+    #scroll-hint {
+      grid-column: 3/4; grid-row: 5/6;
+      z-index: 10;
+      align-self: center; justify-self: center;
+      display: flex; flex-direction: column; align-items: center; gap: .35rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--acento2); opacity: .6;
+      animation: bob 2.5s ease-in-out infinite;
+    }
+    @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+    /* slots do hero */
+    #hero .slot { z-index: 5; }
+    .ha { grid-column:1/3; grid-row:1/4; clip-path:polygon(0 0,100% 0,82% 100%,0 100%); }
+    .hb { grid-column:3/5; grid-row:1/2; clip-path:polygon(0 0,100% 0,100% 65%,0 100%); }
+    .hc { grid-column:5/6; grid-row:1/3; }
+    .hd { grid-column:4/6; grid-row:2/5; clip-path:polygon(18% 0,100% 0,100% 100%,0 100%); }
+    .he { grid-column:1/3; grid-row:4/6; clip-path:polygon(0 0,88% 12%,100% 100%,0 100%); }
+    .hf { grid-column:3/4; grid-row:4/6; clip-path:polygon(8% 8%,92% 0%,100% 88%,0 100%); }
+    .hg { grid-column:4/6; grid-row:5/6; }
+
+    /* ═══════════════════════════════════════════════════════════
+       CONTEÚDO
+    ═══════════════════════════════════════════════════════════ */
+    #conteudo {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 6rem;
+    }
+
+    /* número de seção */
+    .sn {
+      position: absolute;
+      left: -4rem; top: 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6.5rem; font-weight: 300;
+      line-height: 1;
+      color: var(--acento);
+      opacity: .11;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -.04em;
+    }
+
+    /* nota de margem */
+    .nm {
+      position: absolute;
+      right: -4.5rem; top: 50%;
+      transform: rotate(90deg) translateX(-50%);
+      transform-origin: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--acento2); opacity: .38;
+      white-space: nowrap; pointer-events: none;
+    }
+
+    /* ── Bloco de texto ── */
+    .bt {
+      position: relative;
+      padding: 7rem 0 2rem;
+      max-width: 660px;
+    }
+    .bt.dir    { margin-left: auto; text-align: right; }
+    .bt.cen    { margin: 0 auto; text-align: center; max-width: 720px; }
+    .bt.larg   { max-width: 880px; }
+
+    .bt h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 2.8vw, 3.2rem);
+      font-weight: 400; line-height: 1.15;
+      margin-bottom: 1.8rem;
+      color: var(--texto);
+    }
+    .bt h2 em { font-style: italic; color: var(--acento); }
+
+    .bt p {
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1.1rem, 1.35vw, 1.25rem);
+      line-height: 1.92;
+      color: var(--texto-leve);
+      margin-bottom: 1rem;
+    }
+
+    /* drop cap */
+    .dc::first-letter {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 5.5rem; font-weight: 700;
+      line-height: .74;
+      padding-right: .12em; padding-top: .1em;
+      color: var(--acento);
+    }
+
+    /* barra lateral de acento */
+    .bar {
+      border-left: 2px solid var(--acento);
+      padding-left: 1.8rem;
+    }
+
+    /* ── Pull quote ── */
+    .pq {
+      position: relative;
+      padding: 3.5rem 5rem;
+      margin: 4rem 0;
+      text-align: center;
+    }
+    .pq::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:var(--ornamento); opacity:.4; }
+    .pq::after  { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:var(--ornamento); opacity:.4; }
+
+    .pq blockquote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 2.4vw, 2.4rem);
+      font-style: italic; font-weight: 400;
+      line-height: 1.4; color: var(--texto);
+    }
+    .pq cite {
+      display: block; margin-top: 1.2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .82rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--acento2); font-style: normal;
+    }
+    .pq-q {
+      font-family: 'Playfair Display', serif;
+      font-size: 7rem; line-height: 0;
+      color: var(--acento); opacity: .14;
+      display: block; margin-bottom: -1rem;
+    }
+
+    /* ── Divisores ornamentais ── */
+    .od {
+      display: flex; align-items: center; gap: 1.2rem;
+      margin: 4rem 0;
+      color: var(--ornamento);
+    }
+    .od::before, .od::after { content:''; flex:1; height:1px; background:var(--ornamento); opacity:.45; }
+    .od .g { font-family:'Cormorant Garamond',serif; font-size:1.3rem; opacity:.5; letter-spacing:.4em; padding-left:.4em; }
+
+    .lo { width:100%; height:1px; background:var(--linha); margin:3rem 0; }
+
+    /* ── Bloco de tópicos ── */
+    .btop {
+      position: relative;
+      padding: 5rem 0;
+      max-width: 780px;
+    }
+    .btop.cen { margin: 0 auto; }
+    .btop.dir { margin-left: auto; }
+
+    .btop h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2vw, 2rem);
+      font-weight: 400; margin-bottom: 2.5rem;
+      color: var(--texto);
+    }
+
+    .btop ul, .btop ol {
+      list-style: none; padding: 0;
+      display: flex; flex-direction: column; gap: 0;
+      counter-reset: item;
+    }
+
+    .btop li {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      align-items: baseline;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--linha);
+      font-family: 'EB Garamond', serif;
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      line-height: 1.65; color: var(--texto-leve);
+    }
+    .btop li:first-child { border-top: 1px solid var(--linha); }
+
+    .btop ol li::before {
+      counter-increment: item;
+      content: counter(item, decimal-leading-zero);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .72rem; letter-spacing: .1em;
+      color: var(--acento); opacity: .7;
+      align-self: center;
+    }
+    .btop ul li::before { content:'✦'; font-size:.58rem; color:var(--acento); opacity:.7; align-self:center; }
+
+    /* ── Duo ── */
+    .duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      padding: 5rem 0;
+    }
+    .duo.inv    { direction: rtl; }
+    .duo.inv >* { direction: ltr; }
+    .duo.larg   { grid-template-columns: 3fr 2fr; }
+    .duo.alto   { grid-template-columns: 2fr 3fr; }
+
+    .duo .slot-wrap { width: 100%; }
+    .duo .slot        { width: 100%; aspect-ratio: 4/3; }
+    .duo .slot.h      { aspect-ratio: 3/4; }
+    .duo .slot.pano   { aspect-ratio: 16/9; }
+    .duo .slot.sq     { aspect-ratio: 1/1; }
+
+    /* ── Mosaico ── */
+    .mosaico {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 200px 200px;
+      gap: 10px;
+      padding: 3rem 0;
+    }
+    .m1 { grid-column:1/6;  grid-row:1/2; }
+    .m2 { grid-column:6/9;  grid-row:1/2; }
+    .m3 { grid-column:9/13; grid-row:1/3; clip-path:polygon(0 0,100% 0,100% 100%,10% 100%); }
+    .m4 { grid-column:1/4;  grid-row:2/3; }
+    .m5 { grid-column:4/9;  grid-row:2/3; }
+    .mosaico .slot, .mosaico .slot-wrap { height: 100%; }
+
+    /* ── Sangrado ── */
+    .sang { width:calc(100% + 12rem); margin-left:-6rem; margin:2rem -6rem; }
+    .sang .slot { width:100%; height:440px; }
+    .sang.diag .slot { clip-path:polygon(0 5%,100% 0,100% 95%,0 100%); }
+
+    /* ── Flutuante ── */
+    .flutuante {
+      float: right; width: 360px;
+      margin: 0 0 2.5rem 3.5rem;
+      shape-outside: polygon(0 0,100% 0,100% 100%,15% 100%);
+    }
+    .flutuante .slot { width:100%; height:300px; clip-path:polygon(0 0,100% 0,100% 100%,15% 100%); }
+    .flutuante.esq { float:left; margin:0 3.5rem 2.5rem 0; shape-outside:polygon(0 0,100% 0,85% 100%,0 100%); }
+    .flutuante.esq .slot { clip-path:polygon(0 0,100% 0,85% 100%,0 100%); }
+
+    /* ── Trio circular ── */
+    .trio {
+      display: flex; align-items: center;
+      justify-content: center; gap: 3rem;
+      padding: 5rem 0;
+    }
+    .trio .item { display:flex; flex-direction:column; align-items:center; gap:1.2rem; }
+    .trio .il {
+      font-family:'Cormorant Garamond',serif; font-size:.72rem;
+      letter-spacing:.2em; text-transform:uppercase;
+      color:var(--acento2); text-align:center; opacity:.7;
+    }
+
+    /* ── Pill ── */
+    .pill-wrap { padding:1rem 0; }
+    .pill-wrap .slot.pill { width:100%; height:130px; }
+
+    /* ── Fundo alternado ── */
+    .bgalt  { background:var(--bg2); margin:0 -6rem; padding:6rem 6rem; transition:background .5s; }
+    .bgalt2 { background:var(--bg3); margin:0 -6rem; padding:6rem 6rem; transition:background .5s; }
+
+    /* ═══════════════════════════════════════════════════════════
+       RODAPÉ
+    ═══════════════════════════════════════════════════════════ */
+    footer {
+      position: relative;
+      padding: 5rem 6rem;
+      margin-top: 6rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    footer::before {
+      content:''; position:absolute; top:0; left:6rem; right:6rem;
+      height:1px; background:var(--ornamento); opacity:.35;
+    }
+    footer p {
+      font-family:'Cormorant Garamond',serif; font-size:.8rem;
+      letter-spacing:.18em; text-transform:uppercase;
+      color:var(--acento2); opacity:.5;
+    }
+    .fo { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--ornamento); opacity:.3; letter-spacing:.4em; }
+
+  </style>
+</head>
+<body>
+
+  <!-- seletor de tema -->
+  <div id="temas" title="Trocar tema de cores">
+    <button class="ta ativo" onclick="setTema('a')"></button>
+    <button class="tb"       onclick="setTema('b')"></button>
+    <button class="tc"       onclick="setTema('c')"></button>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════ -->
+  <section id="hero">
+
+    <!-- grade decorativa de fundo -->
+    <svg id="hdeco" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="dots" x="0" y="0" width="38" height="38" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="1" fill="var(--ornamento)" opacity=".28"/>
+        </pattern>
+      </defs>
+      <rect width="1440" height="900" fill="url(#dots)"/>
+      <!-- diagonais sutis -->
+      <line x1="440"  y1="0"   x2="0"    y2="440"  stroke="var(--ornamento)" stroke-width=".8" opacity=".18"/>
+      <line x1="900"  y1="0"   x2="0"    y2="900"  stroke="var(--ornamento)" stroke-width=".6" opacity=".1"/>
+      <line x1="1440" y1="180" x2="1060" y2="900"  stroke="var(--ornamento)" stroke-width=".8" opacity=".18"/>
+      <line x1="1440" y1="0"   x2="540"  y2="900"  stroke="var(--ornamento)" stroke-width=".6" opacity=".1"/>
+      <!-- cruzetas centrais -->
+      <line x1="0" y1="450" x2="1440" y2="450" stroke="var(--ornamento)" stroke-width=".5" opacity=".12"/>
+      <line x1="720" y1="0" x2="720"  y2="900" stroke="var(--ornamento)" stroke-width=".5" opacity=".12"/>
+    </svg>
+
+    <!-- anel ornamental -->
+    <svg id="hring" width="540" height="540" viewBox="0 0 540 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="270" cy="270" r="250" stroke="var(--acento)"    stroke-width=".9" opacity=".1"/>
+      <circle cx="270" cy="270" r="208" stroke="var(--ornamento)" stroke-width=".6" opacity=".14" stroke-dasharray="7 12"/>
+      <circle cx="270" cy="270" r="166" stroke="var(--ornamento)" stroke-width=".5" opacity=".09"/>
+      <circle cx="270" cy="270" r="5"   fill="var(--acento)"      opacity=".25"/>
+      <!-- marcas cardeais -->
+      <line x1="266" y1="18"  x2="274" y2="18"  stroke="var(--acento)" stroke-width="1.2" opacity=".22"/>
+      <line x1="266" y1="522" x2="274" y2="522" stroke="var(--acento)" stroke-width="1.2" opacity=".22"/>
+      <line x1="18"  y1="266" x2="18"  y2="274" stroke="var(--acento)" stroke-width="1.2" opacity=".22"/>
+      <line x1="522" y1="266" x2="522" y2="274" stroke="var(--acento)" stroke-width="1.2" opacity=".22"/>
+      <!-- marcas diagonais -->
+      <line x1="91"  y1="91"  x2="97"  y2="97"  stroke="var(--ornamento)" stroke-width="1" opacity=".18"/>
+      <line x1="443" y1="91"  x2="449" y2="97"  stroke="var(--ornamento)" stroke-width="1" opacity=".18"/>
+      <line x1="91"  y1="443" x2="97"  y2="449" stroke="var(--ornamento)" stroke-width="1" opacity=".18"/>
+      <line x1="443" y1="443" x2="449" y2="449" stroke="var(--ornamento)" stroke-width="1" opacity=".18"/>
+    </svg>
+
+    <!-- rótulos de canto -->
+    <span class="hanno tl">I</span>
+    <span class="hanno tr">✦</span>
+    <span class="hanno bl">✦</span>
+    <span class="hanno br">II</span>
+
+    <!-- ── SLOTS DO HERO ── -->
+
+    <div class="slot ha">
+      <div class="sp"></div><div class="sc"></div>
+      <svg class="si" width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="var(--slot-borda)" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="6" width="40" height="40" rx="1"/><line x1="6" y1="36" x2="52" y2="20"/>
+        <circle cx="34" cy="16" r="5"/>
+      </svg>
+      <span class="sl">imagem · desenho · SVG</span>
+    </div>
+
+    <div class="slot hb">
+      <div class="sp"></div>
+      <svg class="si" width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="var(--slot-borda)" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="6" width="40" height="40" rx="1"/>
+        <path d="M6 36 L18 24 L28 30 L38 20 L46 26"/>
+      </svg>
+      <span class="sl">faixa de topo</span>
+    </div>
+
+    <div class="slot hc">
+      <div class="sp"></div>
+      <span class="sl">canto</span>
+    </div>
+
+    <!-- ── TÍTULO PRINCIPAL ── edite aqui ── -->
+    <p id="titulo-principal">
+      O corpo: <br>
+      biologia, história, cultura e identidade
+    </p>
+
+    <!-- subtítulo / tagline — edite ou delete -->
+    <p id="subtitulo">subtítulo · tagline</p>
+
+    <div class="slot hd">
+      <div class="sp"></div><div class="sc"></div>
+      <svg class="si" width="52" height="52" viewBox="0 0 52 52" fill="none" stroke="var(--slot-borda)" stroke-width="1.2" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="6" width="40" height="40" rx="1"/>
+        <circle cx="26" cy="22" r="8"/>
+        <path d="M8 44 L18 32 L26 38 L34 28 L44 40"/>
+      </svg>
+      <span class="sl">lateral direita</span>
+    </div>
+
+    <div class="slot he">
+      <div class="sp"></div>
+      <span class="sl">faixa inferior esquerda</span>
+    </div>
+
+    <div class="slot hf">
+      <div class="sp"></div>
+      <span class="sl">losango</span>
+    </div>
+
+    <div class="slot hg">
+      <div class="sp"></div>
+      <span class="sl">tira rodapé</span>
+    </div>
+
+    <!-- indicador de scroll -->
+    <div id="scroll-hint">
+      <span>rolar</span>
+      <svg width="14" height="22" viewBox="0 0 14 22" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+        <line x1="7" y1="0" x2="7" y2="18"/><polyline points="2,13 7,18 12,13"/>
+      </svg>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       CONTEÚDO
+       Reordene, duplique e delete seções livremente.
+  ══════════════════════════════════════════ -->
+  <main id="conteudo">
+
+
+    <!-- TEXTO 1 -->
+    <div class="bt" style="padding-top:9rem;">
+      <span class="sn">01</span>
+      <span class="nm">seção um</span>
+      <h2>Título da <em>seção 1</em></h2>
+      <p class="dc">Escreva aqui a vontade,trabalho para ismael.</p>
+      <p>Segundo paragrafp. Tame Impala >>>>>>> Qualmudics recenge</p>
+    </div>
+
+    <!-- divisor -->
+    <div class="od"><span class="g">✦ ✦ ✦</span></div>
+
+    <!-- SANGRADO -->
+    <div class="sang diag">
+      <div class="slot-wrap">
+        <div class="slot">
+          <div class="sp"></div><div class="sc"></div>
+          <svg class="si" width="72" height="72" viewBox="0 0 72 72" fill="none" stroke="var(--slot-borda)" stroke-width="1" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="4" width="64" height="64" rx="1"/>
+            <path d="M4 50 L24 30 L36 40 L48 26 L68 46"/>
+            <circle cx="52" cy="20" r="9"/>
+          </svg>
+          <span class="sl">imagem sangrada — largura total</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- DUO 1 — imagem + texto -->
+    <div class="duo">
+      <div class="slot-wrap">
+        <div class="slot">
+          <div class="sp"></div><div class="sc"></div>
+          <span class="sl">imagem · 4:3</span>
+        </div>
+      </div>
+      <div class="bt" style="padding-top:0;">
+        <span class="sn">02</span>
+        <h2>Título da seção 2</h2>
+        <p>Texto ao lado da imagem Para inverter a ordem, adicione a classe <code>inv</code> ao elemento <code>.duo</code>.</p>
+        <p>Segundo paragrafp til i saw yo7r eyes</p>
+      </div>
+    </div>
+
+
+    <!-- PULL QUOTE -->
+    <div class="pq">
+      <span class="pq-q">"</span>
+      <blockquote>
+        "Homem sabio é aquele que usa o buraco <br> da calca pfa coçar as bolas"
+      </blockquote>
+      <cite>— Eu • 2026 • PULL YOURSELF TOGETHER</cite>
+    </div>
+
+
+    <!-- TÓPICOS 1 -->
+    <div class="btop">
+      <span class="sn">03</span>
+      <h3>Título dos tópicos</h3>
+      <ul>
+        <li>Tópico um</li>
+        <li>Tópico dois</li>
+        <li>Tópico três</li>
+        <li>Tópico quatro</li>
+        <li>Tópico cinco </li>
+      </ul>
+    </div>
+
+    <div class="lo"></div>
+
+
+    <!-- FUNDO ALTERNADO + FLUTUANTE -->
+    <div class="bgalt">
+      <div style="overflow:hidden;">
+        <div class="flutuante slot-wrap">
+          <div class="slot">
+            <div class="sp"></div>
+            <span class="sl">imagem flutuante</span>
+          </div>
+        </div>
+        <div class="bt" style="padding-top:0; max-width:100%;">
+          <span class="sn">04</span>
+          <h2>Título da seção 4</h2>
+          <p>Aqui a imagem flutua ao lado do texto, recortada em diagonal. O texto a sw mexe naturalmente.</p>
+          <p class="bar">Esse parágrafo usa uma barra lateral d destaque. Ideal para um trecho em evidência, POIS É DA BARRRRRRRRR</p>
+          <p>Terceiro parágrafo. </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- TÍTULO MOSAICO -->
+    <div class="bt cen" style="padding-top:7rem; padding-bottom:0; max-width:100%;">
+      <span class="sn" style="left:auto; right:0;">05</span>
+      <h2>BANVO DE IMAGENS</h2>
+    </div>
+
+    <!-- MOSAICO -->
+    <div class="mosaico">
+      <div class="slot-wrap m1"><div class="slot" style="height:100%;"><div class="sp"></div><span class="sl">1</span></div></div>
+      <div class="slot-wrap m2"><div class="slot" style="height:100%;"><div class="sp"></div><span class="sl">2</span></div></div>
+      <div class="slot-wrap m3"><div class="slot" style="height:100%;"><div class="sp"></div><span class="sl">3</span></div></div>
+      <div class="slot-wrap m4"><div class="slot" style="height:100%;"><div class="sp"></div><span class="sl">4</span></div></div>
+      <div class="slot-wrap m5"><div class="slot" style="height:100%;"><div class="sp"></div><span class="sl">5</span></div></div>
+    </div>
+
+
+    <!-- DUO 2 invertido — imagem alta -->
+    <div class="duo inv alto" style="padding-top:6rem;">
+      <div class="slot-wrap">
+        <div class="slot h">
+          <div class="sp"></div><div class="sc"></div>
+          <span class="sl">imagem alta · 3:4</span>
+        </div>
+      </div>
+      <div class="bt" style="padding-top:0;">
+        <span class="sn">06</span>
+        <h2>Título da seção 6</h2>
+        <p>Slot em proporção retrato (3:4)</p>
+        <p>Texto complementar desta seção</p>
+      </div>
+    </div>
+
+    <div class="od"><span class="g">§</span></div>
+
+
+    <!-- FUNDO ALTERNADO 2 + TÓPICOS NUMERADOS -->
+    <div class="bgalt2">
+      <div class="btop cen">
+        <span class="sn" style="left:auto; right:-3rem;">07</span>
+        <h3>Outro conjunto de topi</h3>
+        <ol>
+          <li>Primeiro item numerado</li>
+          <li>Segundo item</li>
+          <li>Terceiro item</li>
+          <li>Quarto item </li>
+        </ol>
+      </div>
+    </div>
+
+
+    <!-- TRIO CIRCULAR -->
+    <div class="bt cen" style="padding-bottom:0; max-width:100%;">
+      <span class="sn" style="left:auto; right:0;">08</span>
+      <h2>Galeria circular</h2>
+    </div>
+
+    <div class="trio">
+      <div class="item">
+        <div class="slot-wrap" style="position:relative;">
+          <div class="slot circular" style="width:240px; height:240px;">
+            <div class="sp"></div>
+          </div>
+        </div>
+        <span class="il">legenda · descrição</span>
+      </div>
+      <div class="item">
+        <div class="slot-wrap" style="position:relative;">
+          <div class="slot circular" style="width:360px; height:360px;">
+            <div class="sp"></div>
+          </div>
+        </div>
+        <span class="il">legenda · principal</span>
+      </div>
+      <div class="item">
+        <div class="slot-wrap" style="position:relative;">
+          <div class="slot circular" style="width:200px; height:200px;">
+            <div class="sp"></div>
+          </div>
+        </div>
+        <span class="il">legenda · descrição</span>
+      </div>
+    </div>
+
+
+    <!-- PILL -->
+    <div class="pill-wrap">
+      <div class="slot-wrap" style="position:relative; border-radius:999px; overflow:hidden;">
+        <div class="slot pill" style="width:100%; height:130px;">
+          <div class="sp"></div>
+          <span class="sl">faixa estreita — detalhe · textura · linha</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- TEXTO FINAL -->
+    <div class="bt cen" style="padding-top:8rem; padding-bottom:9rem;">
+      <span class="sn" style="left:auto; right:0;">09</span>
+      <h2>Título da seção final</h2>
+      <p>Última essao. a sia vontade </p>
+    </div>
+
+
+  </main>
+
+
+  <!-- RODAPÉ -->
+  <footer>
+    <p>Edite aqui · rodapé à esquerda</p>
+    <span class="fo">✦ ✦ ✦</span>
+    <p>rodapé à direita · ano</p>
+  </footer>
+
+
+  <script>
+    /* ── Troca de tema ── */
+    function setTema(t) {
+      document.documentElement.className = 'tema-' + t;
+      document.querySelectorAll('#temas button').forEach(b => b.classList.remove('ativo'));
+      document.querySelector('#temas .t' + t).classList.add('ativo');
+    }
+
+    /* ── Reveal ao rolar ── */
+    const els = document.querySelectorAll(
+      '.bt, .btop, .duo, .mosaico, .trio, .pq, .pill-wrap, .sang, .bgalt, .bgalt2, .od'
+    );
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity   = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    els.forEach(el => {
+      el.style.opacity    = '0';
+      el.style.transform  = 'translateY(26px)';
+      el.style.transition = 'opacity .72s ease, transform .72s ease';
+      io.observe(el);
+    });
+  </script>
+
+</body>
+</html>

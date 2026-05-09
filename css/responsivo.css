@@ -1,0 +1,73 @@
+/* =========================================================
+   RESPONSIVO.CSS
+   Ajustes para telas menores, como celular e tablet.
+========================================================= */
+
+@media (max-width: 900px) {
+  /* Menu vira coluna no celular */
+  .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Centraliza as abas */
+  .abas {
+    justify-content: center;
+  }
+
+  /* Capa principal fica mais simples */
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+  }
+
+  /* Esconde blocos decorativos no celular */
+  .hero .bloco {
+    display: none;
+  }
+
+  /* Diminui o título da capa */
+  .hero-titulo h1 {
+    font-size: 48px;
+  }
+
+  /* Duas colunas viram uma coluna */
+  .duas-colunas {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  /* Mosaico vira lista vertical */
+  .mosaico {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Altura dos itens do mosaico no celular */
+  .mosaico .bloco-imagem {
+    height: 220px;
+  }
+
+  /* Galeria circular vira coluna */
+  .galeria-circular {
+    flex-direction: column;
+  }
+
+  /* Círculos ficam do mesmo tamanho no celular */
+  .grande,
+  .medio,
+  .pequeno {
+    width: 240px;
+    height: 240px;
+  }
+
+  /* Rodapé vira coluna */
+  .rodape {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,223 @@
+/* =========================================================
+   COMPONENTES.CSS
+   Caixas de imagem, frase destacada, tópicos, mosaico e galeria.
+========================================================= */
+
+/* Caixa padrão para imagens */
+.bloco-imagem {
+  min-height: 300px;
+  position: relative;
+
+  background: var(--caixa);
+  border: 1px solid var(--borda);
+  box-shadow: 0 14px 35px var(--sombra);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--verde-claro);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 13px;
+
+  overflow: hidden;
+}
+
+/* Textura da caixa de imagem */
+.bloco-imagem::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: radial-gradient(var(--borda) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.25;
+}
+
+/* Borda interna da caixa de imagem */
+.bloco-imagem::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid var(--borda);
+  opacity: 0.6;
+}
+
+/* Texto dentro da caixa de imagem */
+.bloco-imagem span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Área da imagem grande */
+.imagem-grande {
+  margin: 30px 0;
+}
+
+/* Caixa da imagem grande */
+.imagem-grande .bloco-imagem {
+  height: 430px;
+  clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+}
+
+/* Imagem vertical */
+.imagem-alta {
+  min-height: 460px;
+}
+
+/* Parágrafo com barra lateral */
+.texto-com-barra {
+  border-left: 3px solid var(--verde);
+  padding-left: 22px;
+}
+
+/* Frase destacada */
+.frase-destaque {
+  margin: 60px 0;
+  padding: 60px 40px;
+
+  border-top: 1px solid var(--borda);
+  border-bottom: 1px solid var(--borda);
+
+  text-align: center;
+}
+
+/* Texto da frase destacada */
+.frase-destaque p {
+  max-width: 850px;
+  margin: 0 auto;
+
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 4vw, 46px);
+  font-style: italic;
+  color: var(--texto);
+}
+
+/* Lista de tópicos */
+.topicos ul {
+  list-style: none;
+}
+
+/* Item da lista */
+.topicos li {
+  border-top: 1px solid var(--linha);
+  padding: 18px 0;
+
+  color: var(--texto-suave);
+  font-size: 22px;
+}
+
+/* Símbolo antes de cada tópico */
+.topicos li::before {
+  content: "✦";
+  color: var(--verde);
+  margin-right: 12px;
+}
+
+/* Linha no último tópico */
+.topicos li:last-child {
+  border-bottom: 1px solid var(--linha);
+}
+
+/* Mosaico de imagens */
+.mosaico {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 210px 210px;
+  gap: 12px;
+}
+
+/* Posição de cada item do mosaico */
+.item-1 {
+  grid-column: 1 / 6;
+  grid-row: 1 / 2;
+}
+
+.item-2 {
+  grid-column: 6 / 9;
+  grid-row: 1 / 2;
+}
+
+.item-3 {
+  grid-column: 9 / 13;
+  grid-row: 1 / 3;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
+}
+
+.item-4 {
+  grid-column: 1 / 4;
+  grid-row: 2 / 3;
+}
+
+.item-5 {
+  grid-column: 4 / 9;
+  grid-row: 2 / 3;
+}
+
+/* Altura dos itens do mosaico */
+.mosaico .bloco-imagem {
+  height: 100%;
+  min-height: 0;
+}
+
+/* Galeria circular */
+.galeria-circular {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 45px;
+  margin-top: 45px;
+}
+
+/* Cada item da galeria */
+.galeria-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Legenda da galeria */
+.galeria-item p {
+  margin-top: 15px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Círculo da galeria */
+.circulo {
+  position: relative;
+  border-radius: 50%;
+  background: var(--caixa);
+  border: 1px solid var(--borda);
+  box-shadow: 0 14px 35px var(--sombra);
+  overflow: hidden;
+}
+
+/* Textura do círculo */
+.circulo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: radial-gradient(var(--borda) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.25;
+}
+
+/* Tamanhos dos círculos */
+.pequeno {
+  width: 210px;
+  height: 210px;
+}
+
+.medio {
+  width: 230px;
+  height: 230px;
+}
+
+.grande {
+  width: 340px;
+  height: 340px;
+}

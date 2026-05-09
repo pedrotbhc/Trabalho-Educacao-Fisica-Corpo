@@ -1,60 +1,40 @@
-/* =========================================================
-   BASE.CSS
-   Configurações gerais do site:
-   cores, reset, fonte e estilos básicos.
-========================================================= */
-
-/* Variáveis de cores usadas no site inteiro */
-:root {
-  --fundo: #f9f9f7;
-  --fundo-2: #f1f3ef;
-  --fundo-3: #e8ede5;
-
-  --texto: #181a17;
-  --texto-suave: #556055;
-
-  --verde: #3a6b4a;
-  --verde-claro: #5c8a6a;
-
-  --caixa: #eef1eb;
-  --borda: #aabfae;
-  --linha: rgba(24, 26, 23, 0.12);
-  --sombra: rgba(40, 80, 50, 0.14);
+/* BASE.CSS */
+:root{
+    --fundo:#f9f9f7;
+    --fundo-2:#f1f3ef;
+    --fundo-3:#e8ede5;
+    --texto:#181a17;
+    --texto-suave:#556055;
+    --verde:#3a6b4a;
+    --verde-claro:#5c8a6a;
+    --caixa:#eef1eb;
+    --borda:#aabfae;
+    --linha:rgba(24,26,23,.12);
+    --sombra:rgba(40,80,50,.14)
 }
-
-/* Remove margens e espaçamentos padrões do navegador */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0
 }
-
-/* Configuração principal do corpo da página */
-body {
-  background: var(--fundo);
-  color: var(--texto);
-  font-family: 'EB Garamond', serif;
-  overflow-x: hidden;
+body{
+    background:var(--fundo);
+    color:var(--texto);
+    font-family:'EB Garamond',serif;overflow-x:hidden
 }
-
-/* Títulos principais das seções */
-h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(34px, 4vw, 52px);
-  font-weight: 400;
-  line-height: 1.15;
-  margin-bottom: 25px;
+h2{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(34px,4vw,52px);
+    font-weight:400;
+    line-height:1.15;
+    margin-bottom:25px
 }
-
-/* Parte destacada dentro dos títulos */
-h2 em {
-  color: var(--verde);
+h2 em{
+    color:var(--verde)
 }
-
-/* Parágrafos do site */
-p {
-  color: var(--texto-suave);
-  font-size: 22px;
-  line-height: 1.8;
-  margin-bottom: 15px;
+p{
+    color:var(--texto-suave);
+    font-size:22px;
+    line-height:1.8;
+    margin-bottom:15px
 }

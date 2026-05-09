@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorteio de Exercícios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=EB+Garamond:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/sorteio.css">
+    <link rel="stylesheet" href="css/responsivo.css">
+</head>
+<body>
+  <nav class="menu">
+    <div class="abas">
+      <a href="index.html">Início</a>
+      <a href="biologia.html">Biologia</a>
+      <a href="historia.html">História</a>
+      <a href="cultura.html">Cultura</a>
+      <a href="identidade.html">Identidade</a>
+      <a href="galeria.html" class="ativo">Sorteio</a>
+    </div>
+  </nav>
+  <header class="hero-menor"><div><h1>Sorteio de exercícios</h1><p>repetições de 1 a 20 · exercício de 1 a 5</p></div></header>
+  <main class="container">
+    <section class="secao texto centro"><span class="numero"></span><h2>Sorteador da atividade</h2><p>Clique no botão para sortear dois números. O primeiro número mostra quantas repetições a pessoa irá fazer. O segundo número mostra qual exercício será realizado.</p></section>
+    <section class="sorteio-area">
+      <div class="sorteio-card"><p class="sorteio-label">Repetições</p><strong id="numero-repeticoes">?</strong><span>Sorteio de 1 a 20</span></div>
+      <div class="sorteio-card"><p class="sorteio-label">Exercício</p><strong id="numero-exercicio">?</strong><span>Sorteio de 1 a 5</span></div>
+    </section>
+    <section class="resultado-final"><h2>Resultado</h2><p id="resultado-texto">Clique no botão para sortear.</p><button class="botao-sortear" onclick="sortearExercicio()">Sortear exercício</button></section>
+    <section class="secao topicos"><span class="numero">02</span><h2>Tabela de exercícios</h2><ul class="lista-exercicios"><li><strong>1</strong> — Polichinelo</li><li><strong>2</strong> — Agachamento</li><li><strong>3</strong> — Flexão</li><li><strong>4</strong> — Abdominal</li><li><strong>5</strong> — Livre </li></ul></section>
+  </main>
+  <script src="js/sorteio.js"></script>
+
+  <footer class="rodape">
+    <p>Trabalho de Educação Física</p>
+    <span>✦ ✦ ✦</span>
+    <p>2026</p>
+  </footer>
+</body>
+</html>

@@ -1,40 +1,23 @@
-# Site Corpo com abas
+# Site Corpo com sorteio de exercícios
 
-Agora o site possui várias páginas HTML, como se fossem abas.
+A página `galeria.html` virou uma página de sorteio.
 
-## Arquivos principais
+## Sorteios
 
-- `index.html` → página inicial.
-- `biologia.html` → página sobre biologia do corpo.
-- `historia.html` → página sobre história do corpo.
-- `cultura.html` → página sobre corpo e cultura.
-- `identidade.html` → página sobre corpo e identidade.
-- `galeria.html` → página com espaços para imagens.
-- `styles.css` → visual usado por todas as páginas.
+- Repetições: sorteia de 1 até 20.
+- Exercício: sorteia de 1 até 5.
 
-## Como abrir
+## Exercícios
 
-Abra o arquivo `index.html` no navegador.
+1. Polichinelo
+2. Agachamento
+3. Flexão de braço
+4. Abdominal
+5. Corrida parada
 
-Depois clique nas abas do menu:
+## Arquivos novos
 
-- Início
-- Biologia
-- História
-- Cultura
-- Identidade
-- Galeria
+- `css/sorteio.css`: visual do sorteador.
+- `js/sorteio.js`: lógica do sorteio.
 
-## Como editar uma aba
-
-Exemplo: para editar a página de Biologia, abra o arquivo:
-
-`biologia.html`
-
-## Como mudar o visual de todas as páginas
-
-Edite o arquivo:
-
-`styles.css`
-
-Como todas as páginas usam o mesmo CSS, qualquer mudança nele vale para o site inteiro.
+Abra `index.html` e clique na aba `Sorteio`.

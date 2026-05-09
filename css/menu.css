@@ -18,7 +18,6 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  backdrop-filter: blur(8px);
 }
 
 /* Logo do menu */
@@ -36,6 +35,8 @@
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  position: relative;
+  left: 18%;
 }
 
 /* Link normal do menu */

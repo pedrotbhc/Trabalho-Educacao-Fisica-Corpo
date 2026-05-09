@@ -59,6 +59,8 @@ body {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  position: relative;
+  left: 18%;
 }
 
 /* Link normal do menu */

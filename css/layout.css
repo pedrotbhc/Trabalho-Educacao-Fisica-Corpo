@@ -1,0 +1,76 @@
+/* =========================================================
+   LAYOUT.CSS
+   Estrutura das seções, colunas e espaçamentos.
+========================================================= */
+
+/* Área central do conteúdo */
+.container {
+  width: 88%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* Seção padrão */
+.secao {
+  position: relative;
+  padding: 90px 0;
+}
+
+/* Limita a largura dos textos */
+.texto {
+  max-width: 760px;
+}
+
+/* Centraliza textos e blocos */
+.centro {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Número grande decorativo das seções */
+.numero {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 90px;
+  color: var(--verde);
+  opacity: 0.16;
+  margin-bottom: -20px;
+}
+
+/* Layout de duas colunas */
+.duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+  padding: 90px 0;
+}
+
+/* Bloco com fundo diferente */
+.fundo-alternado {
+  background: var(--fundo-2);
+  margin: 40px calc(50% - 50vw);
+  padding: 20px calc(50vw - 50%);
+}
+
+/* Rodapé */
+.rodape {
+  border-top: 1px solid var(--borda);
+  margin: 80px auto 0;
+  padding: 45px 6%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--verde-claro);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* Texto do rodapé */
+.rodape p {
+  font-size: 15px;
+  margin: 0;
+}

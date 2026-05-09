@@ -1,0 +1,623 @@
+:root {
+  --fundo: #f9f9f7;
+  --fundo-2: #f1f3ef;
+  --fundo-3: #e8ede5;
+
+  --texto: #181a17;
+  --texto-suave: #556055;
+
+  --verde: #3a6b4a;
+  --verde-claro: #5c8a6a;
+
+  --caixa: #eef1eb;
+  --borda: #aabfae;
+  --linha: rgba(24, 26, 23, 0.12);
+  --sombra: rgba(40, 80, 50, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: 'EB Garamond', serif;
+  overflow-x: hidden;
+}
+
+.menu {
+  width: 100%;
+  padding: 18px 6%;
+  background: rgba(249, 249, 247, 0.92);
+  border-bottom: 1px solid var(--borda);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  color: green;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid black;
+
+}
+
+.abas {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Link normal do menu */
+.abas a {
+  color: var(--texto-suave);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 13px;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+}
+
+/* Efeito ao passar o mouse */
+.abas a:hover {
+  background: var(--fundo-3);
+  color: var(--verde);
+
+  transform: translateY( -2px );
+  transition: 0.2s;
+}
+
+/* Aba ativa da página atual */
+.abas a.ativo {
+  background: var(--verde);
+  color: white;
+}
+
+/* =========================================================
+   CAPA / HERO
+========================================================= */
+.hero {
+  min-height: 90vh;
+  position: relative;
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 1.4fr 1fr 1fr;
+  grid-template-rows: 90px 1fr auto 1fr 90px;
+
+  background: var(--fundo);
+  overflow: hidden;
+}
+
+/* Pontinhos de fundo da capa */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: radial-gradient(var(--borda) 1px, transparent 1px);
+  background-size: 36px 36px;
+  opacity: 0.22;
+}
+
+/* Título da capa */
+.hero-titulo {
+  grid-column: 2 / 5;
+  grid-row: 3 / 4;
+
+  z-index: 2;
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+}
+
+.hero-titulo h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 6vw, 92px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.hero-titulo p {
+  margin-top: 20px;
+  color: var(--verde-claro);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 16px;
+}
+
+/* Hero menor usado nas páginas internas */
+.hero-menor {
+  min-height: 45vh;
+  background: var(--fundo-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 70px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-menor::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--borda) 1px, transparent 1px);
+  background-size: 34px 34px;
+  opacity: 0.25;
+}
+
+.hero-menor div {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-menor h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 6vw, 76px);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--verde);
+}
+
+.hero-menor p {
+  margin-top: 15px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   BLOCOS DECORATIVOS DA CAPA
+========================================================= */
+.bloco {
+  position: relative;
+  z-index: 1;
+
+  background: var(--caixa);
+  border: 1px solid var(--borda);
+  box-shadow: 0 14px 35px var(--sombra);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--verde-claro);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+
+  overflow: hidden;
+}
+
+/* Textura de pontinhos dentro dos blocos */
+.bloco::before,
+.bloco-imagem::before,
+.circulo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: radial-gradient(var(--borda) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.25;
+}
+
+/* Bordas decorativas simples */
+.bloco::after,
+.bloco-imagem::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid var(--borda);
+  opacity: 0.6;
+}
+
+.bloco span,
+.bloco-imagem span {
+  position: relative;
+  z-index: 1;
+}
+
+.bloco-esquerda {
+  grid-column: 1 / 3;
+  grid-row: 1 / 4;
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
+  height: 400px;
+}
+
+.bloco-esquerda:hover{
+  height: 420px;
+  transition: 0.3s;
+}
+
+.bloco-esquerda img{
+  height: 300px;
+  border-radius: 8px;
+}
+
+.bloco-esquerda img:hover{
+  height: 320px;
+  transition: 0.3s;
+  border-radius: 8px;
+}
+
+.bloco-topo {
+  grid-column: 3 / 5;
+  grid-row: 1 / 2;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+}
+
+.bloco-direita {
+  grid-column: 4 / 6;
+  grid-row: 2 / 5;
+  clip-path: polygon(18% 0, 100% 0, 100% 100%, 0 100%);
+  text-align: end;
+}
+
+#grupo{
+  font-size: 1.4em;
+  position: relative;
+  bottom: 60px;
+  left: 265px;
+}
+
+.bloco-baixo-esquerda {
+  grid-column: 1 / 3;
+  grid-row: 4 / 6;
+  clip-path: polygon(0 0, 88% 12%, 100% 100%, 0 100%);
+}
+
+.bloco-centro-baixo {
+  grid-column: 3 / 4;
+  grid-row: 4 / 6;
+  clip-path: polygon(8% 8%, 92% 0, 100% 88%, 0 100%);
+}
+
+/* =========================================================
+   CONTEÚDO GERAL
+========================================================= */
+.container {
+  width: 88%;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.secao {
+  position: relative;
+  padding: 90px 0;
+}
+
+.texto {
+  max-width: 760px;
+}
+
+.centro {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.numero {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 90px;
+  color: var(--verde);
+  opacity: 0.16;
+  margin-bottom: -20px;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.15;
+  margin-bottom: 25px;
+}
+
+h2 em {
+  color: var(--verde);
+}
+
+p {
+  color: var(--texto-suave);
+  font-size: 22px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+/* =========================================================
+   CAIXAS DE IMAGEM
+========================================================= */
+.bloco-imagem {
+  min-height: 300px;
+  position: relative;
+
+  background: var(--caixa);
+  border: 1px solid var(--borda);
+  box-shadow: 0 14px 35px var(--sombra);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--verde-claro);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 13px;
+
+  overflow: hidden;
+}
+
+.imagem-grande {
+  margin: 30px 0;
+}
+
+.imagem-grande .bloco-imagem {
+  height: 430px;
+  clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+}
+
+.imagem-alta {
+  min-height: 460px;
+}
+
+/* =========================================================
+   DUAS COLUNAS
+========================================================= */
+.duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
+  padding: 90px 0;
+}
+
+.texto-com-barra {
+  border-left: 3px solid var(--verde);
+  padding-left: 22px;
+}
+
+/* =========================================================
+   FRASE DESTACADA
+========================================================= */
+.frase-destaque {
+  margin: 60px 0;
+  padding: 60px 40px;
+
+  border-top: 1px solid var(--borda);
+  border-bottom: 1px solid var(--borda);
+
+  text-align: center;
+}
+
+.frase-destaque p {
+  max-width: 850px;
+  margin: 0 auto;
+
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 4vw, 46px);
+  font-style: italic;
+  color: var(--texto);
+}
+
+/* =========================================================
+   TÓPICOS
+========================================================= */
+.topicos ul {
+  list-style: none;
+}
+
+.topicos li {
+  border-top: 1px solid var(--linha);
+  padding: 18px 0;
+
+  color: var(--texto-suave);
+  font-size: 22px;
+}
+
+.topicos li::before {
+  content: "✦";
+  color: var(--verde);
+  margin-right: 12px;
+}
+
+.topicos li:last-child {
+  border-bottom: 1px solid var(--linha);
+}
+
+/* =========================================================
+   FUNDO ALTERNADO
+========================================================= */
+.fundo-alternado {
+  background: var(--fundo-2);
+  margin: 40px calc(50% - 50vw);
+  padding: 20px calc(50vw - 50%);
+}
+
+/* =========================================================
+   MOSAICO
+========================================================= */
+.mosaico {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 210px 210px;
+  gap: 12px;
+}
+
+.item-1 {
+  grid-column: 1 / 6;
+  grid-row: 1 / 2;
+}
+
+.item-2 {
+  grid-column: 6 / 9;
+  grid-row: 1 / 2;
+}
+
+.item-3 {
+  grid-column: 9 / 13;
+  grid-row: 1 / 3;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%);
+}
+
+.item-4 {
+  grid-column: 1 / 4;
+  grid-row: 2 / 3;
+}
+
+.item-5 {
+  grid-column: 4 / 9;
+  grid-row: 2 / 3;
+}
+
+.mosaico .bloco-imagem {
+  height: 100%;
+  min-height: 0;
+}
+
+/* =========================================================
+   GALERIA CIRCULAR
+========================================================= */
+.galeria-circular {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 45px;
+  margin-top: 45px;
+}
+
+.galeria-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.galeria-item p {
+  margin-top: 15px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.circulo {
+  position: relative;
+  border-radius: 50%;
+  background: var(--caixa);
+  border: 1px solid var(--borda);
+  box-shadow: 0 14px 35px var(--sombra);
+  overflow: hidden;
+}
+
+.pequeno {
+  width: 210px;
+  height: 210px;
+}
+
+.medio {
+  width: 230px;
+  height: 230px;
+}
+
+.grande {
+  width: 340px;
+  height: 340px;
+}
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+.rodape {
+  border-top: 1px solid var(--borda);
+  margin: 80px auto 0;
+  padding: 45px 6%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--verde-claro);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.rodape p {
+  font-size: 15px;
+  margin: 0;
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+@media (max-width: 900px) {
+  .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .abas {
+    justify-content: center;
+  }
+
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+  }
+
+  .hero .bloco {
+    display: none;
+  }
+
+  .hero-titulo h1 {
+    font-size: 48px;
+  }
+
+  .duas-colunas {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .mosaico {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mosaico .bloco-imagem {
+    height: 220px;
+  }
+
+  .galeria-circular {
+    flex-direction: column;
+  }
+
+  .grande,
+  .medio,
+  .pequeno {
+    width: 240px;
+    height: 240px;
+  }
+
+  .rodape {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}

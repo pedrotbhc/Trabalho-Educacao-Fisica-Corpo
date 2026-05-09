@@ -1,0 +1,64 @@
+/* =========================================================
+   MENU.CSS
+   Estilos do menu superior e das abas.
+========================================================= */
+
+/* Barra do menu */
+.menu {
+  width: 100%;
+  padding: 18px 6%;
+  background: rgba(249, 249, 247, 0.92);
+  border-bottom: 1px solid var(--borda);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+
+/* Logo do menu */
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  color: var(--verde);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Área onde ficam os links */
+.abas {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Link normal do menu */
+.abas a {
+  color: var(--texto-suave);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 13px;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+  transition: 0.2s;
+}
+
+/* Efeito ao passar o mouse */
+.abas a:hover {
+  background: var(--fundo-3);
+  color: var(--verde);
+}
+
+/* Aba da página atual */
+.abas a.ativo {
+  background: var(--verde);
+  color: white;
+}
